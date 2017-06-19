@@ -7,7 +7,8 @@ import numpy as np
 import shutil
 import zipfile
 
-root_dir = '~/WORK/kinship/Data_Challenge/codalabs/'
+root_dir = os.path.dirname(os.path.realpath(__file__))
+
 # type labels, which are also the filenames results should be named as
 pair_types = ['bb', 'fd', 'fs', 'md', 'ms', 'sibs', 'ss']
 output_filename = 'scores.txt'
@@ -17,7 +18,7 @@ gtdir = root_dir + 'data/verification_p2/val/'
 gtpaths = [gtdir + s + '_val.csv' for s in pair_types]
 
 # path to zip folder container results
-zippath = root_dir + '/sample_submissions/verification/sample_submission_verification_val.zip'
+zippath = root_dir + '/resources/sample_submissions/verification/sample_submission_verification_val.zip'
 
 # unzip results in temp directory
 tmpdir = 'fiwtmp/'
@@ -46,7 +47,7 @@ if not rpaths:
     print('************************* ERROR ****************************')
     print('************************************************************')
     print('*** No results found. Exit()                             ***')
-    exit
+    exit()
 if not do_score:
     # if only subset of results found give option to score some
     print('************************************************************')
@@ -60,7 +61,7 @@ if not do_score:
     response = input('y/[n]: ')
     if not response == 'y' and not response == 'yes':
         print('Exit()')
-        exit
+        exit()
 
 print(rpaths)
 scores = []
@@ -85,15 +86,13 @@ for k, f in enumerate(rpaths):
 
     # check inputs
     if tl.size != nthresh:
-        print
-        'Invalid size'
-        exit
+        print('Invalid size')
+        exit()
 
     for i in range(0, nthresh):
-        if (score[i] > 1 | score[i] < 0):
-            print
-            'Input not only 1s and 0s'
-            exit
+        if score[i] > 1 | score[i] < 0:
+            print('Input not only 1s and 0s')
+            exit()
 
     hit_rate = np.zeros((nthresh,), dtype=np.float)
     fa_rate = np.zeros((nthresh,), dtype=np.float)
@@ -128,9 +127,9 @@ for k, f in enumerate(rpaths):
     scores.append(max(rec))
 
 # determine average accuracy
-nsets_scored = len(scores)
-overall_acc = np.sum(scores)/nsets_scored
-print('Average accuracy for ' + str(nsets_scored) + ' out of 7 types is ' + str(overall_acc))
+n_sets_scored = len(scores)
+overall_acc = np.sum(scores)/n_sets_scored
+print('Average accuracy for ' + str(n_sets_scored) + ' out of 7 types is ' + str(overall_acc))
 
 
 # delete temp directory zip file was uncompressed into
