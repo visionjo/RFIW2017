@@ -7,7 +7,8 @@ import numpy as np
 import shutil
 import zipfile
 
-root_dir = '~/WORK/kinship/Data_Challenge/codalabs/'
+root_dir = os.path.expanduser('~') + '/WORK/kinship/Data_Challenge/codalabs/'
+
 # type labels, which are also the filenames results should be named as
 pair_types = ['bb', 'fd', 'fs', 'md', 'ms', 'sibs', 'ss']
 output_filename = 'scores.txt'
