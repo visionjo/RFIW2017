@@ -6,11 +6,10 @@
 import os
 import numpy as np
 
+root_dir = os.path.dirname(os.path.realpath(__file__))
 
-root_dir = os.path.expanduser('~') + '/WORK/kinship/Data_Challenge/codalabs/'
-
-f_results = root_dir + '/sample_submissions/classification/results.csv'
-f_gt = root_dir + 'data/classification_p2/val/labels_val.csv'
+f_results = root_dir + '/resources/sample_submissions/classification/results.csv'
+f_gt = root_dir + '/data/classification_p2/val/labels_val.csv'
 output_filename = 'scores2.txt'
 
 
@@ -27,7 +26,7 @@ if n_labels != n_response:
     print('Error: Number of responses does not match of ground truth labels')
     print('Number of labels in ground truth file: ', n_labels)
     print('Number of labels in results file: ', n_response)
-    exit
+    exit()
 
 output_file = open(output_filename, 'w')
 acc = float((tl == responses).sum() / n_labels)
