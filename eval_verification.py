@@ -65,6 +65,7 @@ if not do_score:
 
 print(rpaths)
 scores = []
+
 for k, f in enumerate(rpaths):
     # iterate over result files found
     clab = os.path.basename(f).replace('.csv','')
@@ -73,8 +74,12 @@ for k, f in enumerate(rpaths):
     print('Scoring pair type ', pair_types[ids])
 
     # true labels
-    tl = np.loadtxt(f, dtype=np.int, delimiter='\r\r\n')
-
+    #     tl = np.loadtxt(gtpaths[k], dtype=np.int, delimiter='\r\r\n')
+    tl_id = clab + '_val.csv'
+    gt_to_score = gtdir + '/' + tl_id
+    tl = np.loadtxt(gt_to_score, dtype=np.int, delimiter='\r\r\n')
+    
+    
     # results to score
     score = np.loadtxt(rpaths[k], dtype=np.int, delimiter='\r\r\n')
 
